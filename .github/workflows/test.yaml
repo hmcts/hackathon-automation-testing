@@ -30,10 +30,10 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
-      - uses: azure/setup-kubectl@v3
+            - name: Delete test
+      - id: delete_test
+        uses: kubeshop/testkube-docker-action@v1
         with:
-          version: 'latest' 
-        id: install
-      - uses: actions-hub/kubectl@master
-        with:  
-          args: get ns 
+          command: delete
+          resource: test
+          parameters: curl-test
