@@ -2,6 +2,8 @@ name: Netbox
 run-name: Netbox
 permissions:
   id-token: write
+  contents: read
+  actions: read
 on:
   push:
     branches:
