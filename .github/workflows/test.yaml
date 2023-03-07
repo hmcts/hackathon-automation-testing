@@ -30,6 +30,10 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
+      - uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest' 
+        id: install
       - uses: actions-hub/kubectl@master
         with:  
           args: get ns 
