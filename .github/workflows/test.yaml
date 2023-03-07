@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Set up kubelogin for non-interactive login
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.0.24'
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -30,6 +34,7 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
+          use-kubelogin: 'true'
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
