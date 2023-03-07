@@ -40,9 +40,16 @@ jobs:
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
-#       - uses: actions-hub/kubectl@master
-#         with:
-#           args: get ns
+      - name: Delete test
+        id: delete_test
+        uses: kubeshop/testkube-docker-action@v1
+        with:
+          command: delete
+          resource: test
+          parameters: curl-test
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get ns
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: Deploy to AKS
@@ -52,10 +59,3 @@ jobs:
           namespace: 'default'
           manifests: |
             deploy.yaml
-      - name: Delete test
-        id: delete_test
-        uses: kubeshop/testkube-docker-action@v1
-        with:
-          command: delete
-          resource: test
-          parameters: curl-test
