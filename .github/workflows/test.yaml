@@ -30,10 +30,13 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
-      - name: Delete test
-        id: delete_test
-        uses: kubeshop/testkube-docker-action@v1
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
         with:
-          command: delete
-          resource: test
-          parameters: curl-test
+          namespace: 'default'
+          manifests: |
+            deploy.yaml
