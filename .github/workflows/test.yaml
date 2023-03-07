@@ -30,8 +30,8 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
-            - name: Delete test
-      - id: delete_test
+      - name: Delete test
+        id: delete_test
         uses: kubeshop/testkube-docker-action@v1
         with:
           command: delete
