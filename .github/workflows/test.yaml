@@ -35,9 +35,14 @@ jobs:
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
           use-kubelogin: 'true'
+      - name: env
+        run: env
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get ns
       - name: Deploy to AKS
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
