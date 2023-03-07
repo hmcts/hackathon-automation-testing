@@ -27,7 +27,7 @@ jobs:
         with:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
-          subscription: ‘DTS-SHAREDSERVICESPTL-SBOX'
+          subscription: DTS-SHAREDSERVICESPTL-SBOX
       - uses: actions-hub/kubectl@master
         with:  
           args: get ns 
