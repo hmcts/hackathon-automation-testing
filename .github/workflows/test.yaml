@@ -34,12 +34,18 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
-          use-kubelogin: 'true'
+          #use-kubelogin: 'true'
       - name: env
         run: env
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
+
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get ns
+      - name: run command
+        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: Delete test
         id: delete_test
         uses: kubeshop/testkube-docker-action@v1
@@ -47,11 +53,6 @@ jobs:
           command: delete
           resource: test
           parameters: curl-test
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get ns
-      - name: run command
-        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: Deploy to AKS
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
