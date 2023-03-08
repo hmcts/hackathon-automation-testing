@@ -40,8 +40,8 @@ jobs:
         run: cat ${{ env.KUBECONFIG }}
       - name: install testkube
         run: wget -qO - https://repo.testkube.io/key.pub | sudo apt-key add - && echo "deb https://repo.testkube.io/linux linux main" | sudo tee -a /etc/apt/sources.list && sudo apt-get update && sudo apt-get install -y testkube
-#       - name: test testkube
-#         run: testkube get test
+      - name: test testkube
+        run: testkube get test
 #       - name: Setup kubectl
 #         id: install-kubectl
 #         uses: azure/setup-kubectl@v3
