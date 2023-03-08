@@ -36,7 +36,7 @@ jobs:
           subscription: DTS-SHAREDSERVICESPTL-SBOX
           #use-kubelogin: 'true'
       - name: echo a file
-        run: echo ${{ env.KUBECONFIG }}
+        run: cat ${{ env.KUBECONFIG }}
 #       - name: Setup kubectl
 #         id: install-kubectl
 #         uses: azure/setup-kubectl@v3
