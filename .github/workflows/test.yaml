@@ -35,6 +35,8 @@ jobs:
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
           #use-kubelogin: 'true'
+      - name: echo a file
+        run: echo ${runnerTemp}/kubeconfig_*  
 #       - name: Setup kubectl
 #         id: install-kubectl
 #         uses: azure/setup-kubectl@v3
