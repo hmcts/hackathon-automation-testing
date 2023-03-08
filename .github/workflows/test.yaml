@@ -37,9 +37,9 @@ jobs:
           #use-kubelogin: 'true'
       - name: echo a file
         run: cat ${{ env.KUBECONFIG }}
-#       - name: Setup kubectl
-#         id: install-kubectl
-#         uses: azure/setup-kubectl@v3
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl config current-context"
       - name: run curl command
