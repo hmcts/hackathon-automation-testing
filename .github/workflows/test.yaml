@@ -39,8 +39,8 @@ jobs:
         run: cat ${{ env.KUBECONFIG }}
       - name: install testkube
         run: wget -qO - https://repo.testkube.io/key.pub | sudo apt-key add - && echo "deb https://repo.testkube.io/linux linux main" | sudo tee -a /etc/apt/sources.list && sudo apt-get update && sudo apt-get install -y testkube
-      - name: test testkube
-        run: testkube get test
+#       - name: test testkube
+#         run: testkube get test
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
@@ -51,6 +51,14 @@ jobs:
           kubectl version --client
           kubectl config get-contexts
           kubectl get ns
+      - name: Delete test
+        id: delete_test
+        uses: kubeshop/testkube-docker-action@v1
+        with:
+          command: get
+          resource: tests
+#           parameters: curl-test
+#           namespace: 'netbox'
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl config current-context"
       - name: run curl command
