@@ -41,9 +41,9 @@ jobs:
         id: install-kubectl
         uses: azure/setup-kubectl@v3
 
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get ns
+#       - uses: actions-hub/kubectl@master
+#         with:
+#           args: get ns
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: Delete test
