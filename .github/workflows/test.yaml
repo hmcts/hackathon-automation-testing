@@ -40,23 +40,29 @@ jobs:
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
+      - name: run command
+        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
+      - name: run command
+        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl run mycurlpod --image=curlimages/curl -i --tty -n netbox -- curl -s -o /dev/null -w \"%{http_code}\" netbox"
 
+
+
+
+
+#       - name: Delete test
+#         id: delete_test
+#         uses: kubeshop/testkube-docker-action@v1
+#         with:
+#           command: delete
+#           resource: test
+#           parameters: curl-test
+#       - name: Deploy to AKS
+#         id: deploy-aks
+#         uses: Azure/k8s-deploy@v4
+#         with:
+#           namespace: 'default'
+#           manifests: |
+#             deploy.yaml
 #       - uses: actions-hub/kubectl@master
 #         with:
 #           args: get ns
-      - name: run command
-        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
-      - name: Delete test
-        id: delete_test
-        uses: kubeshop/testkube-docker-action@v1
-        with:
-          command: delete
-          resource: test
-          parameters: curl-test
-      - name: Deploy to AKS
-        id: deploy-aks
-        uses: Azure/k8s-deploy@v4
-        with:
-          namespace: 'default'
-          manifests: |
-            deploy.yaml
