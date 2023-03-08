@@ -43,7 +43,7 @@ jobs:
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: run command
-        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl run mycurlpod --image=curlimages/curl -i --tty -n netbox -- curl -s -o /dev/null -w \"%{http_code}\" netbox"
+        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl run mycurlpod --image=curlimages/curl --rm -i --tty -n netbox -- curl -s -o /dev/null -w \"%{http_code}\" netbox"
 
 
 
