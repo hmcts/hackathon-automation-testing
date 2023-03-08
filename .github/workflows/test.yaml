@@ -34,6 +34,7 @@ jobs:
           resource-group: 'ss-ptlsbox-00-rg'
           cluster-name: 'ss-ptlsbox-00-aks'
           subscription: DTS-SHAREDSERVICESPTL-SBOX
+          admin: true
           #use-kubelogin: 'true'
       - name: echo a file
         run: cat ${{ env.KUBECONFIG }}
