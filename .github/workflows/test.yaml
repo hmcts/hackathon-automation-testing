@@ -41,12 +41,14 @@ jobs:
         run: wget -qO - https://repo.testkube.io/key.pub | sudo apt-key add - && echo "deb https://repo.testkube.io/linux linux main" | sudo tee -a /etc/apt/sources.list && sudo apt-get update && sudo apt-get install -y testkube
 #       - name: test testkube
 #         run: testkube get test
-      - name: Setup kubectl
-        id: install-kubectl
-        uses: azure/setup-kubectl@v3
-      - name: kubeversion
-        run: kubectl version --client
+#       - name: Setup kubectl
+#         id: install-kubectl
+#         uses: azure/setup-kubectl@v3
+#       - name: kubeversion
+#         run: kubectl version --client
       - uses: yokawasa/action-setup-kube-tools@v0.9.2
+        with:
+          kubectl: '1.26.0'
       - run: |
           kubectl version --client
           kubectl config get-contexts
