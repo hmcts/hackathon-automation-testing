@@ -44,7 +44,7 @@ jobs:
 #         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl get ns"
       - name: run curl command
         id: getstatus
-        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl run mycurlpod --image=curlimages/curl --rm -i --tty -n netbox -- curl -s -o /dev/null -w \"%{http_code}\" netbox" >> >> $GITHUB_OUTPUT
+        run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl run mycurlpod --image=curlimages/curl --rm -i --tty -n netbox -- curl -s -o /dev/null -w \"%{http_code}\" netbox" >> $GITHUB_OUTPUT
       - name: output
         run: echo ${{ steps.getstatus.outputs.* }}
 
