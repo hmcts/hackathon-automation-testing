@@ -40,9 +40,13 @@ jobs:
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get ns
+      - name: kubeversion
+        run: kubectl version --client
+      - uses: yokawasa/action-setup-kube-tools@v0.9.2
+      - run: |
+          kubectl version --client
+          kubectl config get-context
+          kubectl get ns
       - name: run command
         run: az aks command invoke --resource-group ss-ptlsbox-00-rg --name ss-ptlsbox-00-aks --command "kubectl config current-context"
       - name: run curl command
